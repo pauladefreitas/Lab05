@@ -1,0 +1,20 @@
+@startuml
+' Diagrama de sequência para Validar Recursos
+actor Focalizador
+participant Frontend
+participant Backend
+database BancoDeDados
+
+Focalizador -> Frontend : Abrir curadoria para validar recursos criados
+Frontend -> Backend : Enviar requisição /GET de recursos com status pendente
+Backend -> BancoDeDados : Verificar recursos no banco de dados
+BancoDeDados --> Backend : Retornar recursos encontrados
+Backend --> Frontend : Retornar recursos criados com status pendente
+Frontend --> Focalizador : Retornar recursos para avaliação do Focalizador
+Focalizador -> Frontend : Aprovar ou negar inclusão do recurso.
+Frontend -> Backend : Enviar requisição /PUT para alterar o status do recurso
+Backend -> BancoDeDados : Alterar recurso no banco de dados
+BancoDeDados --> Backend
+Backend --> Frontend : Confirmação do banco de dados
+Frontend --> Focalizador : Pop up de confirmação
+@enduml

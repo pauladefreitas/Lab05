@@ -1,0 +1,14 @@
+@startuml
+' Diagrama de sequência para Gerar Relatório de Métricas
+actor Coordenador
+participant Frontend
+participant Backend
+database BancoDeDados
+
+Coordenador -> Frontend : Solicitar geração de relatório
+Frontend -> Backend : Solicita /GET métricas
+Backend -> BancoDeDados : Fazer cálculos para obtenção das métricas
+BancoDeDados --> Backend : Retornar o resultado dos cálculos
+Backend --> Frontend : Retornar relatório e renderizar gráfico
+Frontend --> Coordenador : Retornar relatório gerado com gráfico
+@enduml

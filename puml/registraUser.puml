@@ -1,0 +1,21 @@
+@startuml
+' Diagrama de sequência para Registrar Usuário
+actor UsuarioComum
+participant Frontend
+participant Backend
+database BancoDeDados
+
+UsuarioComum -> Frontend : Preencher formulário de registro e enviar dados
+Frontend -> Backend : Requisição POST para salvar dados
+Backend -> Backend : Validar dados de acordo com regras de negócio
+
+alt Dados válidos
+    Backend -> BancoDeDados : Salvar dados
+    BancoDeDados --> Backend : Retornar novo registro de usuário
+    Backend --> Frontend : Confirmação de registro
+    Frontend --> UsuarioComum : Confirmação de sucesso
+else Dados inválidos
+    Backend --> Frontend : Retornar erro de validação
+    Frontend --> UsuarioComum : Exibir mensagem de erro
+end
+@enduml
