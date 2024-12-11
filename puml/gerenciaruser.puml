@@ -1,0 +1,23 @@
+@startuml
+' Diagrama de sequência para o caso de uso: Gerenciar Acesso de Usuário
+
+actor "Administrador" as Admin
+participant Frontend
+participant Backend
+database BancoDeDados
+
+Admin -> Frontend : Solicitar página de gerenciamento de acessos
+Frontend -> Backend : Requisitar lista de usuários e suas permissões
+Backend -> BancoDeDados : Consultar usuários e seus acessos
+BancoDeDados --> Backend : Retorna lista de usuários e acessos
+Backend --> Frontend : Retorna dados dos usuários
+Frontend --> Admin : Exibir lista de usuários com seus acessos
+
+Admin -> Frontend : Solicitar alteração do acesso de um usuário (ex: adicionar/ remover permissões)
+Frontend -> Backend : Enviar requisição de atualização de acesso (usuário-alvo, novas permissões)
+Backend -> BancoDeDados : Atualizar permissões no cadastro do usuário
+BancoDeDados --> Backend : Confirmação da atualização
+Backend --> Frontend : Retornar sucesso da atualização
+Frontend --> Admin : Exibir mensagem de sucesso
+
+@enduml

@@ -1,0 +1,16 @@
+@startuml
+' Diagrama de sequência para o caso de uso: Fazer upload de arquivo
+
+actor "Usuário Comum" as Usuario
+participant Frontend
+participant Backend
+database BancoDeDados
+
+Usuario -> Frontend : Selecionar arquivo e solicitar upload
+Frontend -> Backend : Enviar arquivo para processamento
+Backend -> BancoDeDados : Armazenar metadados do arquivo (nome, tipo, tamanho)
+BancoDeDados --> Backend : Confirmação de armazenamento dos metadados
+Backend --> Frontend : Retornar confirmação de upload
+Frontend --> Usuario : Exibir mensagem de sucesso
+
+@enduml

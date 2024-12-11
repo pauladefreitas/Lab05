@@ -1,0 +1,11 @@
+@startuml
+left to right direction
+
+object Interface
+object Controller
+object Service
+
+Controller -> Interface : listAll()
+Service -> Controller : getAll()
+
+@enduml

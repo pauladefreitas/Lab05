@@ -1,0 +1,16 @@
+@startuml
+' Diagrama de sequência para o caso de uso: Gerar Convite
+
+actor "Usuário" as Usuario
+participant Frontend
+participant Backend
+database BancoDeDados
+
+Usuario -> Frontend : Solicitar geração de convite
+Frontend -> Backend : Requisitar criação de código de convite
+Backend -> BancoDeDados : Inserir novo código de convite e dados associados
+BancoDeDados --> Backend : Retorna código de convite gerado
+Backend --> Frontend : Retornar código de convite
+Frontend --> Usuario : Exibir código/URL de convite
+
+@enduml
