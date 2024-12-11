@@ -1,0 +1,28 @@
+@startuml
+
+actor "Usuário" as Usuario
+participant Frontend
+participant Backend
+database BancoDeDados
+
+Usuario -> Frontend : Visualizar tela de login
+Frontend -> Backend : Requisitar form de login
+Backend -> BancoDeDados : Obter configurações de autenticação
+BancoDeDados --> Backend : Retorna configurações
+Backend --> Frontend : Retorna form de login
+Frontend --> Usuario : Exibir form de login
+
+Usuario -> Frontend : Enviar credenciais (usuário e senha)
+Frontend -> Backend : Enviar credenciais para autenticação
+Backend -> BancoDeDados : Verificar credenciais
+BancoDeDados --> Backend : Retorna resultado da verificação (sucesso/falha)
+
+alt Login bem sucedido
+    Backend -> Frontend : Retornar token/sessão de autenticação
+    Frontend -> Usuario :Redirecionar para landingPage
+else Login mal sucedido
+    Backend -> Frontend : Retornar falha na autenticação
+    Frontend -> Usuario : Exibir mensagem de erro
+end
+
+@enduml
