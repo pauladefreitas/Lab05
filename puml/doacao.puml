@@ -1,0 +1,21 @@
+@startuml
+
+actor "Usuário Não Cadastrado" as Usuario
+participant Frontend
+participant Backend
+database BancoDeDados
+
+Usuario -> Frontend : Visualizar interface de doação
+Frontend -> Backend : Requisitar valor de doação
+Backend -> BancoDeDados : Consultar informações da instituição e parâmetros de doação
+BancoDeDados --> Backend : Retornar informações
+Backend --> Frontend : Retornar formulário de doação pré-carregado
+
+Usuario -> Frontend : Preencher dados de doação e enviar
+Frontend -> Backend : Enviar dados da doação para processamento
+Backend -> BancoDeDados : Registrar doação (valor)
+BancoDeDados --> Backend : Confirmação de registro
+Backend --> Frontend : Retornar confirmação da doação
+Frontend --> Usuario : Exibir mensagem de sucesso na doação
+
+@enduml
