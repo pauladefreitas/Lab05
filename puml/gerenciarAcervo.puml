@@ -1,0 +1,29 @@
+@startuml
+
+actor "Usuário Comum" as Usuario
+participant Frontend
+participant Backend
+database BancoDeDados
+
+Usuario -> Frontend :  Vizualizar as minhas iniciativas
+Frontend -> Backend : Requisição GET pelo id do user para lista de iniciativas do usuário
+Backend -> BancoDeDados : Consultar iniciativas pelo usuário
+BancoDeDados --> Backend : Retorna lista de iniciativas
+Backend --> Frontend : Retorna dados das iniciativas
+Frontend --> Usuario : Exibir lista de iniciativas
+
+Usuario -> Frontend : Solicitar edição de uma iniciativa selecionada
+Frontend -> Backend : Enviar dados atualizados da iniciativa
+Backend -> BancoDeDados : Atualizar iniciativa no acervo
+BancoDeDados --> Backend : Confirmação de atualização
+Backend --> Frontend : Retornar confirmação de edição
+Frontend --> Usuario : Exibir mensagem de sucesso na edição
+
+Usuario -> Frontend : Solicitar exclusão de uma iniciativa
+Frontend -> Backend : Requisição DELETE para exclusão
+Backend -> BancoDeDados : Remover iniciativa do acervo
+BancoDeDados --> Backend : Confirmação de remoção
+Backend --> Frontend : Retornar confirmação de exclusão
+Frontend --> Usuario : Exibir mensagem de sucesso na exclusão
+
+@enduml
